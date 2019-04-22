@@ -38,6 +38,51 @@ public class MapGenerator {
             }
         }
 
+        //pick a random tile not along the edge
+        //pick a random number n of steps
+        //n steps starting from that tile
+        //place wall tiles
+
+    }
+
+    /**
+     * given a position
+     * if empty, make into inside tile
+     * check surroundings to created array of weights for next step
+     * calls random direction to get next position
+     * step to next position
+     * @param n : countdown to end step
+     * @param x,y: coordinates of the world array
+     */
+    public void step(int n, int x, int y, int direction){
+        if(n==0){
+            return;
+        }
+        if(world[x][y] == Tileset.NOTHING) { //maybe if statement is unnecessary
+            world[x][y] = Tileset.FLOOR;
+        }
+        //should make weights based on recent direction and proximity to edge
+        //unweighted for now, also unsure if i want it to return a string
+        int nextDirection = weightedRandomDirection(1,1,1,1);
+
+        switch (nextDirection) {
+            case 0: step(n-1, x, y+1, nextDirection);
+            case 1: step(n-1, x, y-1, nextDirection);
+            case 2: step(n-1, x-1, y, nextDirection);
+            default: step(n-1, x+1, y, nextDirection);
+        }
+    }
+
+    /**
+     * brute force method: (slow)
+     * for every tile
+     *    if it is an inside tile
+     *       for every surrounding tile
+     *          if it is an outside tile
+     *             make it a wall tile
+     */
+    public void walls(){
+
     }
 
     /**
@@ -78,17 +123,12 @@ public class MapGenerator {
      * the others have weight = 1
      *
      * @param up,down,left,right, in that order, weights/frequencies of each direction (may be 0)
-     * @return "up", "down", "left", or "right"
+     * @return 0 = up, 1 = down, 2 = left, or 3 = right
      */
-    private String weightedRandomDirection(int up, int down, int left, int right){
+    private int weightedRandomDirection(int up, int down, int left, int right){
         int[] frequencies = new int[]{up,down,left,right};
         int result = RandomUtils.discrete(RANDOM, frequencies);
-        switch (result) {
-            case 0: return "up";
-            case 1: return "down";
-            case 2: return "left";
-            case 4: return "right";
-        }
+        return result;
     }
 
 }
