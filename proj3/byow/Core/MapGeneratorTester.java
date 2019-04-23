@@ -12,6 +12,7 @@ public class MapGeneratorTester {
 
     @Test
     public void testCoordinateConversion() {
+
         // 3x3 grid [[0,1,2],[3,4,5],[6,7,8]]
         int[] answer3x3 = new int[]{2,1};
         MapGenerator mg3x3 = new MapGenerator(3,3);

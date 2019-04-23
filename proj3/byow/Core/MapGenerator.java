@@ -39,11 +39,11 @@ public class MapGenerator {
             }
         }
 
-        int x = RANDOM.nextInt(WIDTH - 1) + 1;
-        int y = RANDOM.nextInt(LENGTH - 1) + 1;
-        int n = RANDOM.nextInt(100)+1;
+        int x = RANDOM.nextInt(WIDTH - 2) + 1;
+        int y = RANDOM.nextInt(LENGTH - 2) + 1;
+        int n = RANDOM.nextInt(WIDTH) + 1;
         int direction = RANDOM.nextInt(4);
-        step(n,x,y,direction);
+        step(n, x, y, direction);
         walls();
 
     }
@@ -74,13 +74,13 @@ public class MapGenerator {
         if (y <= 1) {
             up = 0;
         }
-        if (y >= LENGTH) {
+        if (y >= LENGTH - 2) {
             down = 0;
         }
         if (x <= 1) {
             left = 0;
         }
-        if (x >= WIDTH) {
+        if (x >= WIDTH - 2) {
             right = 0;
         }
 
@@ -95,16 +95,19 @@ public class MapGenerator {
                 right = right * 2;
         }
 
+        if (up == 0 && down == 0 && left == 0 && right == 0) {
+            return;
+        }
         int nextDirection = weightedRandomDirection(up, down, left, right);
 
         switch (nextDirection) {
             case 0:
-                step(n - 1, x, y + 1, nextDirection);
-            case 1:
                 step(n - 1, x, y - 1, nextDirection);
+            case 1:
+                step(n - 1, x, y + 1, nextDirection);
             case 2:
                 step(n - 1, x - 1, y, nextDirection);
-            default:
+            case 3:
                 step(n - 1, x + 1, y, nextDirection);
         }
     }
