@@ -1,5 +1,6 @@
 package byow.Core;
 
+import byow.TileEngine.Tileset;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,6 +19,13 @@ public class MapGeneratorTester {
         MapGenerator mg3x3 = new MapGenerator(3,3);
         assertEquals(arrayToString(answer3x3), arrayToString(mg3x3.convertIndextoXY(5)));
         assertEquals(5, mg3x3.convertXYtoIndex(answer3x3[0], answer3x3[1]));
+        for (int x = 0; x < 3; x += 1) {
+            for (int y = 0; y < 3; y += 1) {
+                System.out.print(mg3x3.world[x][y].description()+" ");
+            }
+            System.out.println();
+        }
+        System.out.print(mg3x3.world);
 
         // 4x4 grid [[0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15]]
         int[] answer4x4 = new int[]{2,2};

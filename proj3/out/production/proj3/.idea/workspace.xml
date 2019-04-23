@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="377c16f9-806d-49d5-ae01-4e9778e7dd14" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byow/Core/MapGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/MapGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/byow/Core/MapGeneratorTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/MapGeneratorTester.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+            <state relative-caret-position="133">
+              <caret line="128" column="59" selection-start-line="128" selection-start-column="59" selection-end-line="128" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -30,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byow/Core/MapGeneratorTester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+            <state relative-caret-position="170">
+              <caret line="20" column="76" lean-forward="true" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -48,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byow/Core/RandomUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3247">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="71">
+              <caret line="310" selection-start-line="310" selection-end-line="310" />
             </state>
           </provider>
         </entry>
@@ -70,6 +69,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/byow/Core/MapGeneratorTester.java" />
         <option value="$PROJECT_DIR$/byow/Core/MapGenerator.java" />
       </list>
     </option>
@@ -112,7 +112,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556049409705" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556050719728" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -162,7 +162,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 12h 55m 28s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 02m 18s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 02m 38s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 02m 55s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 04m 46s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 06m 27s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 07m 15s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 09m 22s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 10m 50s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 13m 01s.xml">
+      <configuration name="MapGeneratorTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 13m 56s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -184,7 +211,7 @@
       <window_info anchor="bottom" id="Style Checker" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3283582" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33333334" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -207,6 +234,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/byow/Core/RandomUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="310" selection-start-line="310" selection-end-line="310" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/byow/lab12/RandomWorldDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -214,24 +248,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/RandomUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3247">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/byow/Core/MapGeneratorTester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        <state relative-caret-position="170">
+          <caret line="20" column="76" lean-forward="true" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+        <state relative-caret-position="133">
+          <caret line="128" column="59" selection-start-line="128" selection-start-column="59" selection-end-line="128" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

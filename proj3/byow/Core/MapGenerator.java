@@ -15,7 +15,7 @@ public class MapGenerator {
     private static int WIDTH;
     private static int LENGTH;
     //grid that keeps track of what the state of the pixel is at a given (x,y) coordinate
-    TETile[][] world;
+    public TETile[][] world;
     //keeps track of connected pixels/blocks
     UnionFind path;
     private static final long SEED = 2873123;
@@ -124,9 +124,16 @@ public class MapGenerator {
         for (int i = 1; i < WIDTH - 1; i++) {
             for (int j = 1; j < LENGTH - 1; j++) {
                 if (world[i][j] == Tileset.FLOOR) {
-                    for (TETile t : neighbors(i, j)) {
-                        if (t == Tileset.NOTHING) {
-                            t = Tileset.WALL; //i don't think this assignment works
+                    /*for (Position p : neighbors(i, j)) {
+                        if (world[p.x][p.y] == Tileset.NOTHING) {
+                            world[p.x][p.y] = Tileset.WALL;
+                        }
+                    }*/
+                    for(int x = i-1; x<= i+1; x++){ //this puts me in an infinite loop
+                        for(int y = j-1; y<=j+1; y++){
+                            if (world[x][y] == Tileset.NOTHING) {
+                                world[x][y] = Tileset.WALL;
+                            }
                         }
                     }
                 }
@@ -134,19 +141,28 @@ public class MapGenerator {
         }
     }
 
-    private HashSet<TETile> neighbors(int x, int y) {
-        HashSet<TETile> result = new HashSet<>();
-        result.add(world[x - 1][y + 1]);
-        result.add(world[x - 1][y]);
-        result.add(world[x - 1][y - 1]);
-        result.add(world[x][y + 1]);
-        result.add(world[x][y - 1]);
-        result.add(world[x + 1][y + 1]);
-        result.add(world[x + 1][y]);
-        result.add(world[x + 1][y - 1]);
+    private HashSet<Position> neighbors(int x, int y) { //this method doesn't work
+        HashSet<Position> result = new HashSet<>();
+        result.add(new Position(x - 1, y + 1));
+        result.add(new Position(x - 1, y));
+        result.add(new Position(x - 1, y - 1));
+        result.add(new Position(x, y + 1));
+        result.add(new Position(x, y - 1));
+        result.add(new Position(x + 1, y + 1));
+        result.add(new Position(x + 1, y));
+        result.add(new Position(x + 1, y - 1));
         return result;
     }
 
+    private class Position {
+        int x;
+        int y;
+
+        public Position(int X, int Y) {
+            int x = X;
+            int y = Y;
+        }
+    }
 
     /**
      * convertXYtoIndex converts an (x,y) coordinate to an index.
