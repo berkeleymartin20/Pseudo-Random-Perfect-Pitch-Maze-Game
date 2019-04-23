@@ -3,6 +3,7 @@ package byow.Core;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
 
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -30,7 +31,7 @@ public class MapGenerator {
 
 
         world = new TETile[WIDTH][LENGTH];
-        path = new UnionFind(WIDTH*LENGTH);
+        path = new UnionFind(WIDTH * LENGTH);
 
         for (int x = 0; x < WIDTH; x += 1) {
             for (int y = 0; y < LENGTH; y += 1) {
@@ -38,10 +39,12 @@ public class MapGenerator {
             }
         }
 
-        //pick a random tile not along the edge
-        //pick a random number n of steps
-        //n steps starting from that tile
-        //place wall tiles
+        int x = RANDOM.nextInt(WIDTH - 1) + 1;
+        int y = RANDOM.nextInt(LENGTH - 1) + 1;
+        int n = RANDOM.nextInt(100)+1;
+        int direction = RANDOM.nextInt(4);
+        step(n,x,y,direction);
+        walls();
 
     }
 
@@ -51,39 +54,96 @@ public class MapGenerator {
      * check surroundings to created array of weights for next step
      * calls random direction to get next position
      * step to next position
-     * @param n : countdown to end step
+     *
+     * @param n    : countdown to end step
      * @param x,y: coordinates of the world array
      */
-    public void step(int n, int x, int y, int direction){
-        if(n==0){
+    public void step(int n, int x, int y, int direction) {
+        if (n == 0) {
             return;
         }
-        if(world[x][y] == Tileset.NOTHING) { //maybe if statement is unnecessary
+        if (world[x][y] == Tileset.NOTHING) { //maybe if statement is unnecessary
             world[x][y] = Tileset.FLOOR;
         }
-        //should make weights based on recent direction and proximity to edge
-        //unweighted for now, also unsure if i want it to return a string
-        int nextDirection = weightedRandomDirection(1,1,1,1);
+
+        int up = 1;
+        int down = 1;
+        int left = 1;
+        int right = 1;
+
+        if (y <= 1) {
+            up = 0;
+        }
+        if (y >= LENGTH) {
+            down = 0;
+        }
+        if (x <= 1) {
+            left = 0;
+        }
+        if (x >= WIDTH) {
+            right = 0;
+        }
+
+        switch (direction) {
+            case 0:
+                up = up * 2;
+            case 1:
+                down = down * 2;
+            case 2:
+                left = left * 2;
+            case 4:
+                right = right * 2;
+        }
+
+        int nextDirection = weightedRandomDirection(up, down, left, right);
 
         switch (nextDirection) {
-            case 0: step(n-1, x, y+1, nextDirection);
-            case 1: step(n-1, x, y-1, nextDirection);
-            case 2: step(n-1, x-1, y, nextDirection);
-            default: step(n-1, x+1, y, nextDirection);
+            case 0:
+                step(n - 1, x, y + 1, nextDirection);
+            case 1:
+                step(n - 1, x, y - 1, nextDirection);
+            case 2:
+                step(n - 1, x - 1, y, nextDirection);
+            default:
+                step(n - 1, x + 1, y, nextDirection);
         }
     }
 
     /**
      * brute force method: (slow)
      * for every tile
-     *    if it is an inside tile
-     *       for every surrounding tile
-     *          if it is an outside tile
-     *             make it a wall tile
+     * if it is an inside tile
+     * for every surrounding tile
+     * if it is an outside tile
+     * make it a wall tile
      */
-    public void walls(){
-
+    public void walls() {
+        for (int i = 1; i < WIDTH - 1; i++) {
+            for (int j = 1; j < LENGTH - 1; j++) {
+                if (world[i][j] == Tileset.FLOOR) {
+                    for (TETile t : neighbors(i, j)) {
+                        if (t == Tileset.NOTHING) {
+                            t = Tileset.WALL; //i don't think this assignment works
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    private HashSet<TETile> neighbors(int x, int y) {
+        HashSet<TETile> result = new HashSet<>();
+        result.add(world[x - 1][y + 1]);
+        result.add(world[x - 1][y]);
+        result.add(world[x - 1][y - 1]);
+        result.add(world[x][y + 1]);
+        result.add(world[x][y - 1]);
+        result.add(world[x + 1][y + 1]);
+        result.add(world[x + 1][y]);
+        result.add(world[x + 1][y - 1]);
+        return result;
+    }
+
 
     /**
      * convertXYtoIndex converts an (x,y) coordinate to an index.
@@ -125,8 +185,8 @@ public class MapGenerator {
      * @param up,down,left,right, in that order, weights/frequencies of each direction (may be 0)
      * @return 0 = up, 1 = down, 2 = left, or 3 = right
      */
-    private int weightedRandomDirection(int up, int down, int left, int right){
-        int[] frequencies = new int[]{up,down,left,right};
+    private int weightedRandomDirection(int up, int down, int left, int right) {
+        int[] frequencies = new int[]{up, down, left, right};
         int result = RandomUtils.discrete(RANDOM, frequencies);
         return result;
     }
