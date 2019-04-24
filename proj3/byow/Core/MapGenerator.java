@@ -13,7 +13,7 @@ import java.util.Random;
 public class MapGenerator {
 
     private static int WIDTH;
-    private static int LENGTH;
+    private static int HEIGHT;
     //grid that keeps track of what the state of the pixel is at a given (x,y) coordinate
     public TETile[][] world;
     //keeps track of connected pixels/blocks
@@ -23,27 +23,27 @@ public class MapGenerator {
 
     /**
      * @param width  The width of the screen
-     * @param length The length of the screen
+     * @param height The length of the screen
      */
-    public MapGenerator(int width, int length) {
+    public MapGenerator(int width, int height) {
         WIDTH = width;
-        LENGTH = length;
+        HEIGHT = height;
 
 
-        world = new TETile[WIDTH][LENGTH];
-        path = new UnionFind(WIDTH * LENGTH);
+        world = new TETile[HEIGHT][WIDTH];
+        path = new UnionFind(WIDTH * HEIGHT);
 
-        for (int x = 0; x < WIDTH; x += 1) {
-            for (int y = 0; y < LENGTH; y += 1) {
-                world[x][y] = Tileset.NOTHING;
+        for (int r = 0; r < HEIGHT; r += 1) {
+            for (int c = 0; c < WIDTH; c += 1) {
+                world[r][c] = Tileset.NOTHING;
             }
         }
 
-        int x = RANDOM.nextInt(WIDTH - 2) + 1;
-        int y = RANDOM.nextInt(LENGTH - 2) + 1;
-        int n = RANDOM.nextInt(WIDTH) + 1;
+        int r = RANDOM.nextInt(HEIGHT - 2) + 1;
+        int c = RANDOM.nextInt(WIDTH - 2) + 1;
+        int n = RANDOM.nextInt(WIDTH*HEIGHT) + 1; //up to change
         int direction = RANDOM.nextInt(4);
-        step(n, x, y, direction);
+        step(n, r, c, direction);
         walls();
 
     }
@@ -55,32 +55,32 @@ public class MapGenerator {
      * calls random direction to get next position
      * step to next position
      *
-     * @param n    : countdown to end step
-     * @param x,y: coordinates of the world array
+     * @param n         : countdown to end step
+     * @param r,c       : coordinates of the world array
+     * @param direction : 0,1,2,3
      */
-    public void step(int n, int x, int y, int direction) {
+    public void step(int n, int r, int c, int direction) {
         if (n == 0) {
             return;
         }
-        if (world[x][y] == Tileset.NOTHING) { //maybe if statement is unnecessary
-            world[x][y] = Tileset.FLOOR;
-        }
+
+        world[r][c] = Tileset.FLOOR;
 
         int up = 1;
         int down = 1;
         int left = 1;
         int right = 1;
 
-        if (y <= 1) {
+        if (r <= 1) {
             up = 0;
         }
-        if (y >= LENGTH - 2) {
+        if (r >= HEIGHT - 2) {
             down = 0;
         }
-        if (x <= 1) {
+        if (c <= 1) {
             left = 0;
         }
-        if (x >= WIDTH - 2) {
+        if (c >= WIDTH - 2) {
             right = 0;
         }
 
@@ -91,7 +91,7 @@ public class MapGenerator {
                 down = down * 2;
             case 2:
                 left = left * 2;
-            case 4:
+            case 3:
                 right = right * 2;
         }
 
@@ -102,13 +102,16 @@ public class MapGenerator {
 
         switch (nextDirection) {
             case 0:
-                step(n - 1, x, y - 1, nextDirection);
+                step(n - 1, r - 1, c, nextDirection);
+                break;
             case 1:
-                step(n - 1, x, y + 1, nextDirection);
+                step(n - 1, r+1, c, nextDirection);
+                break;
             case 2:
-                step(n - 1, x - 1, y, nextDirection);
+                step(n - 1, r, c-1, nextDirection);
+                break;
             case 3:
-                step(n - 1, x + 1, y, nextDirection);
+                step(n - 1, r, c+1, nextDirection);
         }
     }
 
@@ -121,16 +124,16 @@ public class MapGenerator {
      * make it a wall tile
      */
     public void walls() {
-        for (int i = 1; i < WIDTH - 1; i++) {
-            for (int j = 1; j < LENGTH - 1; j++) {
+        for (int i = 1; i < HEIGHT - 1; i++) {
+            for (int j = 1; j < WIDTH - 1; j++) {
                 if (world[i][j] == Tileset.FLOOR) {
                     /*for (Position p : neighbors(i, j)) {
                         if (world[p.x][p.y] == Tileset.NOTHING) {
                             world[p.x][p.y] = Tileset.WALL;
                         }
                     }*/
-                    for(int x = i-1; x<= i+1; x++){ //this puts me in an infinite loop
-                        for(int y = j-1; y<=j+1; y++){
+                    for (int x = i - 1; x <= i + 1; x++) {
+                        for (int y = j - 1; y <= j + 1; y++) {
                             if (world[x][y] == Tileset.NOTHING) {
                                 world[x][y] = Tileset.WALL;
                             }

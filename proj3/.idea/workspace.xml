@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="377c16f9-806d-49d5-ae01-4e9778e7dd14" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byow/Core/MapGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/MapGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byow/Core/MapGeneratorTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/MapGeneratorTester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator$Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator$Position.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGeneratorTester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGeneratorTester.class" afterDir="false" />
     </list>
@@ -17,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="129" column="25" lean-forward="true" selection-start-line="129" selection-start-column="25" selection-end-line="129" selection-end-column="25" />
+            <state relative-caret-position="62">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/byow/Core/MapGeneratorTester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="20" column="76" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
+            <state relative-caret-position="34">
+              <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -41,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byow/lab12/RandomWorldDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+            <state relative-caret-position="408">
+              <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -77,7 +80,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="978" />
     <option name="width" value="1594" />
     <option name="height" value="1452" />
@@ -115,7 +118,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556051546691" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556066018822" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -165,34 +168,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 10m 50s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 16h 31m 58s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 13m 01s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 16h 37m 57s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 13m 56s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 16h 41m 51s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 18m 43s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 16h 43m 11s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 19m 56s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 17h 05m 02s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 20m 39s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 17h 12m 37s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 22m 41s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 17h 29m 00s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 24m 27s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 17h 31m 33s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 27m 13s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 17h 32m 38s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.23 at 13h 32m 17s.xml">
+    <history-entry file="MapGeneratorTester - 2019.04.23 at 17h 32m 58s.xml">
       <configuration name="MapGeneratorTester" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -214,7 +217,7 @@
       <window_info anchor="bottom" id="Style Checker" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33333334" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.48424545" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -246,25 +249,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/lab12/RandomWorldDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/MapGeneratorTester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="20" column="76" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
+        <state relative-caret-position="408">
+          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="129" column="25" lean-forward="true" selection-start-line="129" selection-start-column="25" selection-end-line="129" selection-end-column="25" />
+        <state relative-caret-position="62">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byow/Core/MapGeneratorTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
         </state>
       </provider>
     </entry>
