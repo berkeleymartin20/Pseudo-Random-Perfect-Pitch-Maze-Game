@@ -18,17 +18,16 @@ public class MapGenerator {
     public TETile[][] world;
     //keeps track of connected pixels/blocks
     UnionFind path;
-    private static final long SEED = 2873123;
-    private static final Random RANDOM = new Random(SEED); //dunno how to deal with seed
+    private Random RANDOM; //dunno how to deal with seed
 
     /**
      * @param width  The width of the screen
      * @param height The length of the screen
      */
-    public MapGenerator(int width, int height) {
+    public MapGenerator(int width, int height, int seed) {
         WIDTH = width;
         HEIGHT = height;
-
+        RANDOM = new Random(seed);
 
         world = new TETile[HEIGHT][WIDTH];
         path = new UnionFind(WIDTH * HEIGHT);
@@ -41,7 +40,7 @@ public class MapGenerator {
 
         int r = RANDOM.nextInt(HEIGHT - 2) + 1;
         int c = RANDOM.nextInt(WIDTH - 2) + 1;
-        int n = RANDOM.nextInt(WIDTH*HEIGHT) + 1; //up to change
+        int n = RANDOM.nextInt(WIDTH * HEIGHT) + 1; //up to change
         int direction = RANDOM.nextInt(4);
         step(n, r, c, direction);
         walls();
@@ -105,13 +104,13 @@ public class MapGenerator {
                 step(n - 1, r - 1, c, nextDirection);
                 break;
             case 1:
-                step(n - 1, r+1, c, nextDirection);
+                step(n - 1, r + 1, c, nextDirection);
                 break;
             case 2:
-                step(n - 1, r, c-1, nextDirection);
+                step(n - 1, r, c - 1, nextDirection);
                 break;
             case 3:
-                step(n - 1, r, c+1, nextDirection);
+                step(n - 1, r, c + 1, nextDirection);
         }
     }
 
