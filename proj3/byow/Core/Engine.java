@@ -38,7 +38,6 @@ public class Engine {
      * @return the 2D TETile[][] representing the state of the world
      */
     public TETile[][] interactWithInputString(String input) {
-        // TODO: Fill out this method so that it run the engine using the input
         // passed in as an argument, and return a 2D tile representation of the
         // world that would have been drawn if the same inputs had been given
         // to interactWithKeyboard().
@@ -64,6 +63,6 @@ public class Engine {
             System.out.println();
         }*/
 
-        return map.world;
+        return map.world();
     }
 }

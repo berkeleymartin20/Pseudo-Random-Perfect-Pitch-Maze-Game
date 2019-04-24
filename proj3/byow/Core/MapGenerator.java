@@ -1,6 +1,5 @@
 package byow.Core;
 
-import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
 
@@ -16,7 +15,7 @@ public class MapGenerator {
     private static int WIDTH;
     private static int HEIGHT;
     //grid that keeps track of what the state of the pixel is at a given (x,y) coordinate
-    public TETile[][] world;
+    private TETile[][] world;
     //keeps track of connected pixels/blocks
     UnionFind path;
     private Random RANDOM; //dunno how to deal with seed
@@ -88,12 +87,18 @@ public class MapGenerator {
         switch (direction) {
             case 0:
                 up = up * 2;
+                break;
             case 1:
                 down = down * 2;
+                break;
             case 2:
                 left = left * 2;
+                break;
             case 3:
                 right = right * 2;
+                break;
+            default:
+                break;
         }
 
         if (up == 0 && down == 0 && left == 0 && right == 0) {
@@ -113,6 +118,9 @@ public class MapGenerator {
                 break;
             case 3:
                 step(n - 1, r, c + 1, nextDirection);
+                break;
+            default:
+                break;
         }
     }
 
@@ -162,9 +170,9 @@ public class MapGenerator {
         int x;
         int y;
 
-        public Position(int X, int Y) {
-            int x = X;
-            int y = Y;
+        Position(int X, int Y) {
+            x = X;
+            y = Y;
         }
     }
 
@@ -212,6 +220,10 @@ public class MapGenerator {
         int[] frequencies = new int[]{up, down, left, right};
         int result = RandomUtils.discrete(RANDOM, frequencies);
         return result;
+    }
+
+    public TETile[][] world() {
+        return world;
     }
 
 }

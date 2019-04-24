@@ -2,7 +2,6 @@ package byow.Core;
 
 import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
-import byow.TileEngine.Tileset;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
