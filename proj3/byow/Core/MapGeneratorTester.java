@@ -74,8 +74,15 @@ public class MapGeneratorTester {
         TERenderer ter = new TERenderer();
         Engine engine = new Engine();
         TETile[][] map = engine.interactWithInputString("n12323s");
+        /*for (int x = 0; x < map.length; x += 1) {
+            for (int y = 0; y < map[0].length; y += 1) {
+                System.out.print(map[x][y].description() + " ");
+            }
+            System.out.println();
+        }*/
         ter.initialize(map.length, map[0].length);
         ter.renderFrame(map);
+        ter.renderFrame(mg3x4.world);
 
     }
 }

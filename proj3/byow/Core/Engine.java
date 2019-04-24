@@ -51,11 +51,18 @@ public class Engine {
         //pick out seed
         int seed = 0;
         for (int i = 0; i < chararray.length - 1; i++) {
-            seed = seed * 10 + chararray[i];
+            seed = seed * 10 + Character.getNumericValue(chararray[i]);
         }
 
         //create map
         MapGenerator map = new MapGenerator(WIDTH, HEIGHT, seed);
+
+        /*for (int x = 0; x < HEIGHT; x += 1) {
+            for (int y = 0; y < WIDTH; y += 1) {
+                System.out.print(map.world[x][y].description() + " ");
+            }
+            System.out.println();
+        }*/
 
         return map.world;
     }

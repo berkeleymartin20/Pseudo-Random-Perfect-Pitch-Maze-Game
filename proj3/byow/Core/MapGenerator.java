@@ -1,5 +1,6 @@
 package byow.Core;
 
+import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
 
@@ -25,6 +26,7 @@ public class MapGenerator {
      * @param height The length of the screen
      */
     public MapGenerator(int width, int height, int seed) {
+
         WIDTH = width;
         HEIGHT = height;
         RANDOM = new Random(seed);
