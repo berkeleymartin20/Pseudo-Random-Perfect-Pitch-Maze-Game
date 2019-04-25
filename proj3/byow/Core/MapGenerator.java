@@ -59,7 +59,6 @@ public class MapGenerator {
         roomCheck[0] = true;
         for (int i = 0; i <= numRooms; i++) {
             generateRoom(i);
-            System.out.println(" numRooms " + numRooms + " i " + i);
         }
 
         int r = RANDOM.nextInt(HEIGHT - 3) + 1;
@@ -125,7 +124,6 @@ public class MapGenerator {
             checkRoom(r, c);
 
             world[r][c] = Tileset.FLOOR;
-            print();
 
             int up = 1;
             int down = 1;
