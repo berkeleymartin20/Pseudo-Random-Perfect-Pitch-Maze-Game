@@ -65,7 +65,8 @@ public class Engine {
 
         return map.world();
     }
-    public static void main (String[] args) {
+
+    public static void main(String[] args) {
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
         TETile[][] world = Engine.interactWithInputString("n45585787540869836s");

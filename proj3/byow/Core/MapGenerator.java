@@ -16,13 +16,17 @@ public class MapGenerator {
     private static int WIDTH;
     private static int HEIGHT;
     private TETile[][] world;
-    private int[][] rooms; //world of zeroes except at places with rooms (then it will be i for ith room)
-    private boolean[] roomCheck; //ith element is ith room. 0 element is the outside. true if checked
+
+    //world of zeroes except at places with rooms (then it will be i for ith room)
+    private int[][] rooms;
+
+    //ith element is ith room. 0 element is the outside. true if checked
+    private boolean[] roomCheck;
     private Random RANDOM; //dunno how to deal with seed
 
-    public void print(){
-        for(int i = 0; i<HEIGHT; i++){
-            for(int j = 0; j<WIDTH; j++){
+    public void print() {
+        for (int i = 0; i < HEIGHT; i++) {
+            for (int j = 0; j < WIDTH; j++) {
                 System.out.print(world[i][j].description() + " ");
             }
             System.out.println();
@@ -53,7 +57,7 @@ public class MapGenerator {
         roomCheck = new boolean[numRooms + 1];
         Arrays.fill(roomCheck, false);
         roomCheck[0] = true;
-        for(int i = 0; i<=numRooms; i++) {
+        for (int i = 0; i <= numRooms; i++) {
             generateRoom(i);
             System.out.println(" numRooms " + numRooms + " i " + i);
         }
@@ -71,26 +75,25 @@ public class MapGenerator {
         //need to make sure don't call random on 0
         int r = HEIGHT - 3;
         int c = WIDTH - 3;
-        if(r!=0) {
+        if (r != 0) {
             r = RANDOM.nextInt(r) + 1;
         }
-        if(c!=0) {
+        if (c != 0) {
             c = RANDOM.nextInt(c) + 1;
         }
 
-        //height and width are the extension from the center tile. can be 0. however this mean it only supports odd sized rooms
-        int height = Math.min(r -1, HEIGHT - r -2);
-        if(height!=0){
+        int height = Math.min(r - 1, HEIGHT - r - 2);
+        if (height != 0) {
             height = RANDOM.nextInt(height);
         }
-        int width = Math.min(c -1, WIDTH - c -2);
-        if(width!=0){
+        int width = Math.min(c - 1, WIDTH - c - 2);
+        if (width != 0) {
             width = RANDOM.nextInt(width);
         }
 
         for (int i = r - height; i <= r + height; i++) {
             for (int j = c - width; j <= c + width; j++) {
-                if(world[i][j] == Tileset.FLOOR){
+                if (world[i][j] == Tileset.FLOOR) {
                     roomCheck[rooms[i][j]] = true;
                 }
                 world[i][j] = Tileset.FLOOR;
@@ -170,15 +173,15 @@ public class MapGenerator {
                     direction = nextDirection;
                     break;
                 case 1:
-                    r = r+1;
+                    r = r + 1;
                     direction = nextDirection;
                     break;
                 case 2:
-                    c = c-1;
+                    c = c - 1;
                     direction = nextDirection;
                     break;
                 case 3:
-                    c = c+1;
+                    c = c + 1;
                     direction = nextDirection;
                     break;
                 default:

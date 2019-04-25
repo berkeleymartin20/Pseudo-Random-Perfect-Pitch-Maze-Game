@@ -1,10 +1,10 @@
 package byow.Core;
 
-import byow.TileEngine.TERenderer;
-import byow.TileEngine.TETile;
+//import byow.TileEngine.TERenderer;
+//import byow.TileEngine.TETile;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 public class MapGeneratorTester {
 
