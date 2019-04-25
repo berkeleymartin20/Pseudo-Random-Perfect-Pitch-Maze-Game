@@ -3,8 +3,9 @@ package byow.Core;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Random;
+
 
 /**
  * @author Martin Lee and Claire Tsau
@@ -14,11 +15,19 @@ public class MapGenerator {
 
     private static int WIDTH;
     private static int HEIGHT;
-    //grid that keeps track of what the state of the pixel is at a given (x,y) coordinate
     private TETile[][] world;
-    //keeps track of connected pixels/blocks
-    UnionFind path;
+    private int[][] rooms; //world of zeroes except at places with rooms (then it will be i for ith room)
+    private boolean[] roomCheck; //ith element is ith room. 0 element is the outside. true if checked
     private Random RANDOM; //dunno how to deal with seed
+
+    public void print(){
+        for(int i = 0; i<HEIGHT; i++){
+            for(int j = 0; j<WIDTH; j++){
+                System.out.print(world[i][j].description() + " ");
+            }
+            System.out.println();
+        }
+    }
 
     /**
      * @param width  The width of the screen
@@ -31,21 +40,71 @@ public class MapGenerator {
         RANDOM = new Random(seed);
 
         world = new TETile[HEIGHT][WIDTH];
-        path = new UnionFind(WIDTH * HEIGHT);
+        rooms = new int[HEIGHT][WIDTH];
 
         for (int r = 0; r < HEIGHT; r += 1) {
             for (int c = 0; c < WIDTH; c += 1) {
                 world[r][c] = Tileset.NOTHING;
+                rooms[r][c] = 0;
             }
         }
 
-        int r = RANDOM.nextInt(HEIGHT - 2) + 1;
-        int c = RANDOM.nextInt(WIDTH - 2) + 1;
-        int n = RANDOM.nextInt(WIDTH * HEIGHT) + 1; //up to change
+        int numRooms = RANDOM.nextInt(10) + 1; //number of rooms [1,10]
+        roomCheck = new boolean[numRooms + 1];
+        Arrays.fill(roomCheck, false);
+        roomCheck[0] = true;
+        for(int i = 0; i<=numRooms; i++) {
+            generateRoom(i);
+            System.out.println(" numRooms " + numRooms + " i " + i);
+        }
+
+        int r = RANDOM.nextInt(HEIGHT - 3) + 1;
+        int c = RANDOM.nextInt(WIDTH - 3) + 1;
         int direction = RANDOM.nextInt(4);
-        step(n, r, c, direction);
+        step(r, c, direction);
+
         walls();
 
+    }
+
+    private void generateRoom(int roomNum) {
+        //need to make sure don't call random on 0
+        int r = HEIGHT - 3;
+        int c = WIDTH - 3;
+        if(r!=0) {
+            r = RANDOM.nextInt(r) + 1;
+        }
+        if(c!=0) {
+            c = RANDOM.nextInt(c) + 1;
+        }
+
+        //height and width are the extension from the center tile. can be 0. however this mean it only supports odd sized rooms
+        int height = Math.min(r -1, HEIGHT - r -2);
+        if(height!=0){
+            height = RANDOM.nextInt(height);
+        }
+        int width = Math.min(c -1, WIDTH - c -2);
+        if(width!=0){
+            width = RANDOM.nextInt(width);
+        }
+
+        for (int i = r - height; i <= r + height; i++) {
+            for (int j = c - width; j <= c + width; j++) {
+                if(world[i][j] == Tileset.FLOOR){
+                    roomCheck[rooms[i][j]] = true;
+                }
+                world[i][j] = Tileset.FLOOR;
+                rooms[i][j] = roomNum;
+            }
+        }
+
+    }
+
+    private void checkRoom(int r, int c) {
+        int room = rooms[r][c];
+        if (!roomCheck[room]) {
+            roomCheck[room] = true;
+        }
     }
 
     /**
@@ -55,72 +114,76 @@ public class MapGenerator {
      * calls random direction to get next position
      * step to next position
      *
-     * @param n         : countdown to end step
      * @param r,c       : coordinates of the world array
      * @param direction : 0,1,2,3
      */
-    public void step(int n, int r, int c, int direction) {
-        if (n == 0) {
-            return;
-        }
+    public void step(int r, int c, int direction) {
+        while (!roomsConnected()) {
+            checkRoom(r, c);
 
-        world[r][c] = Tileset.FLOOR;
+            world[r][c] = Tileset.FLOOR;
+            print();
 
-        int up = 1;
-        int down = 1;
-        int left = 1;
-        int right = 1;
+            int up = 1;
+            int down = 1;
+            int left = 1;
+            int right = 1;
 
-        if (r <= 1) {
-            up = 0;
-        }
-        if (r >= HEIGHT - 2) {
-            down = 0;
-        }
-        if (c <= 1) {
-            left = 0;
-        }
-        if (c >= WIDTH - 2) {
-            right = 0;
-        }
+            if (r <= 1) {
+                up = 0;
+            }
+            if (r >= HEIGHT - 2) {
+                down = 0;
+            }
+            if (c <= 1) {
+                left = 0;
+            }
+            if (c >= WIDTH - 2) {
+                right = 0;
+            }
 
-        switch (direction) {
-            case 0:
-                up = up * 2;
-                break;
-            case 1:
-                down = down * 2;
-                break;
-            case 2:
-                left = left * 2;
-                break;
-            case 3:
-                right = right * 2;
-                break;
-            default:
-                break;
-        }
+            switch (direction) {
+                case 0:
+                    up = up * 10;
+                    break;
+                case 1:
+                    down = down * 10;
+                    break;
+                case 2:
+                    left = left * 10;
+                    break;
+                case 3:
+                    right = right * 10;
+                    break;
+                default:
+                    break;
+            }
 
-        if (up == 0 && down == 0 && left == 0 && right == 0) {
-            return;
-        }
-        int nextDirection = weightedRandomDirection(up, down, left, right);
+            if (up == 0 && down == 0 && left == 0 && right == 0) {
+                return;
+            }
+            int nextDirection = weightedRandomDirection(up, down, left, right);
 
-        switch (nextDirection) {
-            case 0:
-                step(n - 1, r - 1, c, nextDirection);
-                break;
-            case 1:
-                step(n - 1, r + 1, c, nextDirection);
-                break;
-            case 2:
-                step(n - 1, r, c - 1, nextDirection);
-                break;
-            case 3:
-                step(n - 1, r, c + 1, nextDirection);
-                break;
-            default:
-                break;
+            switch (nextDirection) {
+                case 0:
+                    r = r - 1;
+                    direction = nextDirection;
+                    break;
+                case 1:
+                    r = r+1;
+                    direction = nextDirection;
+                    break;
+                case 2:
+                    c = c-1;
+                    direction = nextDirection;
+                    break;
+                case 3:
+                    c = c+1;
+                    direction = nextDirection;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -153,27 +216,13 @@ public class MapGenerator {
         }
     }
 
-    private HashSet<Position> neighbors(int x, int y) { //this method doesn't work
-        HashSet<Position> result = new HashSet<>();
-        result.add(new Position(x - 1, y + 1));
-        result.add(new Position(x - 1, y));
-        result.add(new Position(x - 1, y - 1));
-        result.add(new Position(x, y + 1));
-        result.add(new Position(x, y - 1));
-        result.add(new Position(x + 1, y + 1));
-        result.add(new Position(x + 1, y));
-        result.add(new Position(x + 1, y - 1));
-        return result;
-    }
-
-    private class Position {
-        int x;
-        int y;
-
-        Position(int X, int Y) {
-            x = X;
-            y = Y;
+    private boolean roomsConnected() {
+        for (int i = 0; i < roomCheck.length; i++) {
+            if (!roomCheck[i]) {
+                return false;
+            }
         }
+        return true;
     }
 
     /**

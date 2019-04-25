@@ -6,8 +6,8 @@ import byow.TileEngine.TETile;
 public class Engine {
     TERenderer ter = new TERenderer();
     /* Feel free to change the width and height. */
-    public static final int WIDTH = 80;
-    public static final int HEIGHT = 30;
+    public static final int WIDTH = 50;
+    public static final int HEIGHT = 50;
 
     /**
      * Method used for exploring a fresh world. This method should handle all inputs,
@@ -37,7 +37,7 @@ public class Engine {
      * @param input the input string to feed to your program
      * @return the 2D TETile[][] representing the state of the world
      */
-    public TETile[][] interactWithInputString(String input) {
+    public static final TETile[][] interactWithInputString(String input) {
         // passed in as an argument, and return a 2D tile representation of the
         // world that would have been drawn if the same inputs had been given
         // to interactWithKeyboard().
@@ -64,5 +64,11 @@ public class Engine {
         }*/
 
         return map.world();
+    }
+    public static void main (String[] args) {
+        TERenderer ter = new TERenderer();
+        ter.initialize(WIDTH, HEIGHT);
+        TETile[][] world = Engine.interactWithInputString("n45585787540869836s");
+        ter.renderFrame(world);
     }
 }
