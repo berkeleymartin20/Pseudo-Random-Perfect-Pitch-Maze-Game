@@ -6,8 +6,8 @@ import byow.TileEngine.TETile;
 public class Engine {
     TERenderer ter = new TERenderer();
     /* Feel free to change the width and height. */
-    public static final int WIDTH = 50;
-    public static final int HEIGHT = 50;
+    public static final int WIDTH = 80;
+    public static final int HEIGHT = 30;
 
     /**
      * Method used for exploring a fresh world. This method should handle all inputs,
@@ -54,22 +54,15 @@ public class Engine {
         }
 
         //create map
-        MapGenerator map = new MapGenerator(WIDTH, HEIGHT, seed);
-
-        /*for (int x = 0; x < HEIGHT; x += 1) {
-            for (int y = 0; y < WIDTH; y += 1) {
-                System.out.print(map.world[x][y].description() + " ");
-            }
-            System.out.println();
-        }*/
+        MapGenerator map = new MapGenerator(WIDTH,HEIGHT, seed);
 
         return map.world();
     }
 
     public static void main(String[] args) {
         TERenderer ter = new TERenderer();
-        ter.initialize(WIDTH, HEIGHT);
-        TETile[][] world = Engine.interactWithInputString("n45585787540869836s");
+        ter.initialize(WIDTH,HEIGHT);
+        TETile[][] world = Engine.interactWithInputString("n45599970009836s");
         ter.renderFrame(world);
     }
 }
