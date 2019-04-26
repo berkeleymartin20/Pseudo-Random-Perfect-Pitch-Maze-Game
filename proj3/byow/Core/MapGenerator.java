@@ -61,7 +61,7 @@ public class MapGenerator {
             }
         }
 
-        int numRooms = RANDOM.nextInt(HEIGHT * WIDTH / 50) + 1; //number of rooms [1,10]
+        int numRooms = RANDOM.nextInt(HEIGHT * WIDTH / 100) + 1; //number of rooms [1,10]
         myRooms = new Room[numRooms + 1];
         for (int i = 0; i < numRooms + 1; i++) {
             myRooms[i] = new Room(0, 0);
@@ -119,14 +119,14 @@ public class MapGenerator {
             c = pickC();
         }
 
-        int width = RANDOM.nextInt(WIDTH - r - 1);
-        int height = RANDOM.nextInt(HEIGHT - c - 1);
+        int width = RANDOM.nextInt(WIDTH - r - 2)+1;
+        int height = RANDOM.nextInt(HEIGHT - c - 2)+1;
 
         myRooms[roomNum].r = r;
         myRooms[roomNum].c = c;
 
-        for (int i = r; i <= r + width / 3; i++) {
-            for (int j = c; j <= c + height / 3; j++) {
+        for (int i = r; i <= r + width / 4; i++) {
+            for (int j = c; j <= c + height / 4; j++) {
                 connectIfRoom(i, j, roomNum);
                 if (world[i][j] == Tileset.FLOOR) {
                     break;

@@ -62,7 +62,7 @@ public class Engine {
     public static void main(String[] args) {
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH,HEIGHT);
-        TETile[][] world = Engine.interactWithInputString("n45599970009836s");
+        TETile[][] world = Engine.interactWithInputString("n23523123568654564s");
         ter.renderFrame(world);
     }
 }

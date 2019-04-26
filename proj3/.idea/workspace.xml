@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="377c16f9-806d-49d5-ae01-4e9778e7dd14" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byow/Core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byow/Core/MapGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/MapGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/byow/lab13/MemoryGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/lab13/MemoryGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/Engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/Engine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/lab13/MemoryGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/lab13/MemoryGame.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,11 +26,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="73" column="8" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
+            <state relative-caret-position="255">
+              <caret line="63" column="70" selection-start-line="63" selection-start-column="70" selection-end-line="63" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7233#7234#0" expanded="true" />
+                <element signature="e#7228#7229#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byow/Core/Engine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="968">
-              <caret line="64" column="66" selection-start-line="64" selection-start-column="66" selection-end-line="64" selection-end-column="66" />
+            <state relative-caret-position="356">
+              <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -82,8 +76,8 @@
         <option value="$PROJECT_DIR$/byow/Core/UnionFind.java" />
         <option value="$PROJECT_DIR$/byow/lab13/MemoryGame.java" />
         <option value="$PROJECT_DIR$/byow/Core/MapGeneratorTester.java" />
-        <option value="$PROJECT_DIR$/byow/Core/Engine.java" />
         <option value="$PROJECT_DIR$/byow/Core/MapGenerator.java" />
+        <option value="$PROJECT_DIR$/byow/Core/Engine.java" />
       </list>
     </option>
   </component>
@@ -131,7 +125,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556252703010" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556279497578" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -255,7 +249,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
+    <frame x="-6" y="-6" width="1293" height="733" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20890689" />
@@ -363,18 +357,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/Core/Engine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="968">
-          <caret line="64" column="66" selection-start-line="64" selection-start-column="66" selection-end-line="64" selection-end-column="66" />
+        <state relative-caret-position="356">
+          <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="73" column="8" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
+        <state relative-caret-position="255">
+          <caret line="63" column="70" selection-start-line="63" selection-start-column="70" selection-end-line="63" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7233#7234#0" expanded="true" />
+            <element signature="e#7228#7229#0" expanded="true" />
           </folding>
         </state>
       </provider>
