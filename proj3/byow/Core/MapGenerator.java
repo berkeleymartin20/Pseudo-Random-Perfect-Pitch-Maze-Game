@@ -18,78 +18,61 @@ public class MapGenerator {
     private TETile[][] world;
 
     //world of zeroes except at places with rooms (then it will be i for ith room)
-    public int[][] rooms;
+    public int[][] roomWorld;
 
-    //ith element is ith room. 0 element is the outside. true if checked
-    private Room[] myRooms;
-    private Random RANDOM; //dunno how to deal with seed
+    //list of rooms' indexPositions
+    private int[] indexedRoomPosition;
 
     private UF roomsUnion;
 
-    /**
-     * class Room
-     */
-    private class Room {
-        int r;
-        int c;
+    private int numRooms;
 
-        public Room(int R, int C) {
-            r = R;
-            c = C;
-        }
+    private Random RANDOM;
 
-    }
+    public static int avatarLocation;
+    public static int goalLocation;
+    public static TETile avatar;
 
 
     /**
      * @param width  The width of the screen
      * @param height The length of the screen
      */
-    public MapGenerator(int width, int height, int seed) {
+    public MapGenerator(int width, int height, int seed /*TETile avtr*/) {
 
         WIDTH = width;
         HEIGHT = height;
         RANDOM = new Random(seed);
+        //avatar = avtr;
 
         world = new TETile[WIDTH][HEIGHT];
-        rooms = new int[WIDTH][HEIGHT];
+        roomWorld = new int[WIDTH][HEIGHT];
 
         for (int r = 0; r < WIDTH; r += 1) {
             for (int c = 0; c < HEIGHT; c += 1) {
                 world[r][c] = Tileset.NOTHING;
-                rooms[r][c] = 0;
+                roomWorld[r][c] = WIDTH*HEIGHT;
             }
         }
 
-        int numRooms = RANDOM.nextInt(HEIGHT * WIDTH / 100) + 1; //number of rooms [1,10]
-        myRooms = new Room[numRooms + 1];
-        for (int i = 0; i < numRooms + 1; i++) {
-            myRooms[i] = new Room(0, 0);
-        }
-        roomsUnion = new UF(numRooms + 1);
-        roomsUnion.union(0, 1);
-        for (int i = 1; i < numRooms + 1; i++) {
+        numRooms = RANDOM.nextInt(HEIGHT * WIDTH / 60) + 2; //number of rooms at least 2
+        indexedRoomPosition = new int[numRooms];
+        roomsUnion = new UF(numRooms);
+        for (int i = 0; i < numRooms; i++) {
             generateRoom(i);
         }
 
-        for (int i = 1; i < numRooms + 1; i++) {
-            while (!roomsUnion.connected(1, i)) {
-                step(myRooms[i].r, myRooms[i].c, RANDOM.nextInt(4), i);
+        for (int i = 0; i < numRooms; i++) {
+            while (!roomsUnion.connected((i+1)%numRooms, i)) {
+                int[] rc = convertIndextoXY(indexedRoomPosition[i]);
+                step(rc[0], rc[1], RANDOM.nextInt(4), i);
             }
         }
 
-        /*for (int r = 0; r < WIDTH; r += 1) {
-            for (int c = 0; c < HEIGHT; c += 1) {
-                if (rooms[r][c] < 10) {
-                    System.out.print("0" + rooms[r][c] + "   ");
-                } else {
-                    System.out.print(rooms[r][c] + "   ");
-                }
-            }
-            System.out.println();
-        }*/
-
         walls();
+
+        avatarPoint();
+        goalPoint();
 
     }
 
@@ -122,8 +105,9 @@ public class MapGenerator {
         int width = RANDOM.nextInt(WIDTH - r - 2)+1;
         int height = RANDOM.nextInt(HEIGHT - c - 2)+1;
 
-        myRooms[roomNum].r = r;
-        myRooms[roomNum].c = c;
+        /*myRooms[roomNum].r = r;
+        myRooms[roomNum].c = c;*/
+        indexedRoomPosition[roomNum] = convertXYtoIndex(r,c);
 
         for (int i = r; i <= r + width / 4; i++) {
             for (int j = c; j <= c + height / 4; j++) {
@@ -132,15 +116,15 @@ public class MapGenerator {
                     break;
                 }
                 world[i][j] = Tileset.FLOOR;
-                rooms[i][j] = roomNum;
+                roomWorld[i][j] = roomNum;
             }
         }
 
     }
 
     private void connectIfRoom(int r, int c, int roomNum) {
-        int room = rooms[r][c];
-        if (room != 0 && !roomsUnion.connected(roomNum, room)) {
+        int room = roomWorld[r][c];
+        if (room<numRooms && !roomsUnion.connected(roomNum, room)) {
             roomsUnion.union(roomNum, room);
         }
     }
@@ -156,11 +140,12 @@ public class MapGenerator {
      * @param direction : 0,1,2,3
      */
     public void step(int r, int c, int direction, int roomNum) {
-        while (!roomsUnion.connected(1, roomNum)) {
+        int targetRoomNum = (roomNum + 1)% numRooms;
+        while (!roomsUnion.connected(roomNum, targetRoomNum)) {
             connectIfRoom(r, c, roomNum);
 
             world[r][c] = Tileset.FLOOR;
-            rooms[r][c] = roomNum;
+            roomWorld[r][c] = roomNum;
 
             int up = 1;
             int down = 1;
@@ -180,18 +165,37 @@ public class MapGenerator {
                 right = 0;
             }
 
+            int[] targetRC = convertIndextoXY(indexedRoomPosition[targetRoomNum]);
+
+            int rToTarget = r - targetRC[0];
+            int cToTarget = c - targetRC[1];
+
+
+            if(rToTarget>0){
+                up = up*5;
+            }
+            else{
+                down = down*5;
+            }
+            if(cToTarget>0){
+                left = left * 5;
+            }
+            else{
+                right = right *5;
+            }
+
             switch (direction) {
                 case 0:
-                    up = up * 10;
+                    up = up * 15;
                     break;
                 case 1:
-                    down = down * 10;
+                    down = down * 15;
                     break;
                 case 2:
-                    left = left * 10;
+                    left = left * 15;
                     break;
                 case 3:
-                    right = right * 10;
+                    right = right * 15;
                     break;
                 default:
                     break;
@@ -200,6 +204,7 @@ public class MapGenerator {
             if (up == 0 && down == 0 && left == 0 && right == 0) {
                 return;
             }
+
             int nextDirection = weightedRandomDirection(up, down, left, right);
 
             switch (nextDirection) {
@@ -264,8 +269,60 @@ public class MapGenerator {
         return result;
     }
 
-    public TETile[][] world() {
+    public TETile[][] getWorld() {
         return world;
     }
+
+    /**
+     * picks the initial starting point of the avatar
+     */
+    public void avatarPoint(){
+        int r = pickR();
+        int c = pickC();
+        while(world[r][c]!= Tileset.FLOOR){
+            r = pickR();
+            c = pickC();
+        }
+        avatarLocation = convertXYtoIndex(r,c);
+        world[r][c] = avatar;
+    }
+
+    /**
+     * picks the initial starting point of the avatar
+     */
+    public void goalPoint(){
+        int r = pickR();
+        int c = pickC();
+        while(world[r][c]!= Tileset.FLOOR &&
+                (convertXYtoIndex(r,c)!=avatarLocation)){
+            r = pickR();
+            c = pickC();
+        }
+        goalLocation = convertXYtoIndex(r,c);
+    }
+
+    public static int convertXYtoIndex(int x, int y) {
+        if (y == 0) {
+            return x;
+        } else {
+            return y * WIDTH + x;
+        }
+    }
+
+    /**
+     * convertIndextoXY converts an index to an XY coordinate.
+     * x = 0 y = 0 is the top left corner of the screen
+     * This will be used to smooth operations between world and path smoother
+     *
+     * @param p index of the position
+     * @return returns an array where coord[0] = x position and coord[1] = y position
+     */
+    public static int[] convertIndextoXY(int p) {
+        int[] coord = new int[2];
+        coord[0] = p % WIDTH;
+        coord[1] = p / WIDTH;
+        return coord;
+    }
+
 
 }
