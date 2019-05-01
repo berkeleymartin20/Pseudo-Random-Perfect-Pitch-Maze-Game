@@ -12,12 +12,13 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Engine {
     TERenderer ter = new TERenderer();
-    /* Feel free to change the width and height. */
     public static final int WIDTH = 80;
     public static final int HEIGHT = 30;
     private static final int PITCH_LIMIT = 128;
@@ -25,9 +26,10 @@ public class Engine {
     private static final int TILE_SIZE = 16;
     private boolean hasntStarted = true;
     private boolean endGame = true;
-    private static TETile[][] world;
+    private TETile[][] world; //TODO
     private boolean startGame = false;
     private boolean doneChoosingCharacter = true;
+    private boolean endGameScreen = false;
     private MidiChannel midi;
 
     /**
@@ -45,142 +47,168 @@ public class Engine {
         MapGenerator.avatar = Tileset.AVATAR;
         displayMenu();
         Clip clip = null;
+        Clip bleep = null;
+        Clip done = null;
         try {
             String filename = "byow/Core/background.wav";
+            String beep = "byow/Core/beep.wav";
+            String finish = "byow/Core/finish.wav";
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(filename).getAbsoluteFile());
+            AudioInputStream inputStream2 = AudioSystem.getAudioInputStream(new File(beep).getAbsoluteFile());
+            AudioInputStream inputStream3 = AudioSystem.getAudioInputStream(new File(finish).getAbsoluteFile());
             clip = AudioSystem.getClip();
+            bleep = AudioSystem.getClip();
+            done = AudioSystem.getClip();
             clip.open(inputStream);
+            bleep.open(inputStream2);
+            done.open(inputStream3);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) { } //Background music at the lobby
-
         while(endGame) {
+            //SPEC CODE
 
-            //navigate in the main lobby
-            if (doneChoosingCharacter && hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
-                if (P < 2) {
-                    P++;
+            //in menu, ready to start
+            if(!endGameScreen && doneChoosingCharacter && hasntStarted){
+                if(StdDraw.isKeyPressed(KeyEvent.VK_N)) {
+                    menuMovement(bleep);
+                    startGame = true;
                 }
-                displayMenu(P);
-                try {
-                    Thread.sleep(200);
-                } catch (Exception e) {
-                }
-            }
-            if (doneChoosingCharacter && hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-                if (P > 0) {
-                    P--;
-                }
-                displayMenu(P);
-                try {
-                    Thread.sleep(200);
-                } catch (Exception e) {
-                }
-            }
-            if (doneChoosingCharacter && hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) {
-                if (P == 0) { startGame = true; }
-                if (P == 1) { displayAvatar(P2);
-                    try { Thread.sleep(200);
-                    } catch (Exception e) { }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_C)) {
+                    displayAvatar(P2);
+                    menuMovement(bleep);
                     doneChoosingCharacter = false;
                 }
-                //if(P == 2) { displayInstruments(); }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+                    if (P < 2) {
+                        P++;
+                    }
+                    displayMenu(P);
+                    StdDraw.show();
+                    menuMovement(bleep);
+                }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_W)) {
+                    if (P > 0) {
+                        P--;
+                    }
+                    displayMenu(P);
+                    StdDraw.show();
+                    menuMovement(bleep);
+                }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE)){
+                    menuMovement(bleep);
+                    if (P == 0) { startGame = true; }
+                    if (P == 2) {
+                        displayAvatar(P2);
+                        StdDraw.show();
+                        try {
+                            Thread.sleep(200);
+                        } catch (Exception e) {
+                        }
+                        doneChoosingCharacter = false;
+                    }
+                }
+                else if(startGame){
+                    hasntStarted = false;
+                    TERenderer ter = new TERenderer();
+                    ter.initialize(WIDTH, HEIGHT);
+                    String seed = "n519788003164s";
+                    world = interactWithInputString(seed);
+                    ter.renderFrame(world);
+                    clip.stop();
+                }
             }
 
-            //navigate in the character selection
-            if (!doneChoosingCharacter && StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-                if (P2 > 0) {
-                    P2--;
+            //avatar selection screen
+            if(!endGameScreen && !doneChoosingCharacter ){
+                if(StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+                    if (P2< 3) {
+                        P2++;
+                    }
+                    displayAvatar(P2);
+                    StdDraw.show();
+                    menuMovement(bleep);
                 }
-                displayAvatar(P2);
-                try {
-                    Thread.sleep(200);
-                } catch (Exception e) {
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_W)) {
+                    if (P2 > 0) {
+                        P2--;
+                    }
+                    displayAvatar(P2);
+                    StdDraw.show();
+                    menuMovement(bleep);
+                }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE)){
+                    menuMovement(bleep);
+                    if (P2 == 0) { MapGenerator.avatar = Tileset.AVATAR; }
+                    if (P2 == 1) { MapGenerator.avatar = Tileset.MOUNTAIN; }
+                    if (P2 == 2) { MapGenerator.avatar = Tileset.FLOWER; }
+                    if (P2 == 3) { MapGenerator.avatar = Tileset.TREE; }
+                    doneChoosingCharacter = true;
+                    displayMenu(P);
+                    StdDraw.show();
                 }
             }
-            if (!doneChoosingCharacter && StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
-                if (P2< 3) {
-                    P2++;
+
+            //in the game, on the map
+            if(!endGameScreen && !hasntStarted && startGame){
+                if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
+                    int[] goal = MapGenerator.convertIndextoXY(MapGenerator.goalLocation);
+                    world[goal[0]][goal[1]] = Tileset.FLOWER;
+                    ter.renderFrame(world);
                 }
-                displayAvatar(P2);
-                try {
-                    Thread.sleep(200);
-                } catch (Exception e) {
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+                    moveAvatar(new int[]{0,-1});
+                }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_W)) {
+                    moveAvatar(new int[]{0,1});
+                }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+                    moveAvatar(new int[]{1,0});
+                }
+                else if(StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+                    moveAvatar(new int[]{-1,0});
                 }
             }
-            if (!doneChoosingCharacter && StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) {
-                if (P2 == 0) { MapGenerator.avatar = Tileset.AVATAR; }
-                if (P2 == 1) { MapGenerator.avatar = Tileset.MOUNTAIN; }
-                if (P2 == 2) { MapGenerator.avatar = Tileset.FLOWER; }
-                if (P2 == 3) { MapGenerator.avatar = Tileset.TREE; }
-                try { Thread.sleep(200);
-                } catch (Exception e) { }
+
+            //game ended. Options to restart or quit
+            if (!hasntStarted && MapGenerator.avatarLocation == MapGenerator.goalLocation) {
+                endGameScreen = true;
+                hasntStarted = true;
+                displayEnding();
+                StdDraw.show();
+                done.setFramePosition(0);
+                done.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+            if(endGameScreen && StdDraw.isKeyPressed(KeyEvent.VK_N)) {
+                try {Thread.sleep(100);} catch (Exception e) {}
+                endGameScreen = false;
+                startGame = false;
                 doneChoosingCharacter = true;
+                hasntStarted = true;
                 displayMenu(P);
+                done.stop();
+                StdDraw.show();
             }
 
-            //start the game
-            if (doneChoosingCharacter && hasntStarted && startGame) {
-                hasntStarted = false;
-                TERenderer ter = new TERenderer();
-                ter.initialize(WIDTH, HEIGHT);
-                String seed = "n519788084356064s";
-                world = interactWithInputString(seed);
-                ter.renderFrame(world);
-                clip.stop();
-            }
-
-            // CHEAT: SHOW THE GOAL
-            if (!hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-                int[] goal = MapGenerator.convertIndextoXY(MapGenerator.goalLocation);
-                world[goal[0]][goal[1]] = Tileset.FLOWER;
-                ter.renderFrame(world);
-            }
-
-            //move the character
-            if (!hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-                int[] move = new int[]{0, 1};
-                update(move);
-                ter.renderFrame(world);
-                sound();
-                if (MapGenerator.avatarLocation == MapGenerator.goalLocation) {
-                    endGame = false;
-                    displayEnding();
-                }
-            }
-            if (!hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
-                int[] move = new int[]{0, -1};
-                update(move);
-                ter.renderFrame(world);
-                sound();
-                if (MapGenerator.avatarLocation == MapGenerator.goalLocation) {
-                    endGame = false;
-                    displayEnding();
-                }
-            }
-            if (!hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
-                int[] move = new int[]{1, 0};
-                update(move);
-                ter.renderFrame(world);
-                sound();
-                if (MapGenerator.avatarLocation == MapGenerator.goalLocation) {
-                    endGame = false;
-                    displayEnding();
-                }
-            }
-            if (!hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
-                int[] move = new int[]{-1, 0};
-                update(move);
-                ter.renderFrame(world);
-                sound();
-                if (MapGenerator.avatarLocation == MapGenerator.goalLocation) {
-                    endGame = false;
-                    displayEnding();
-                }
-            }
-
+            //kill the game
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
                 System.exit(0);
             }
+        }
+    }
+
+    public void moveAvatar(int[] move){
+        update(move);
+        ter.renderFrame(world);
+        sound();
+    }
+
+    public void menuMovement(Clip bleep){
+        try {
+            bleep.setFramePosition(0);
+            bleep.start();
+            Thread.sleep(200);
+            bleep.stop();
+        } catch (Exception e) {
         }
     }
 
@@ -237,8 +265,58 @@ public class Engine {
             world[coord[0]][coord[1]] = world[coord[0] + move[0]][coord[1]+move[1]];
             world[coord[0] + move[0]][coord[1]+move[1]] = temp;
             MapGenerator.avatarLocation = MapGenerator.convertXYtoIndex(coord[0] + move[0],coord[1]+move[1]);
+        }  else if(world[coord[0] + move[0]][coord[1]+move[1]] == Tileset.FLOWER)    {
+            world[coord[0] + move[0]][coord[1]+move[1]] = world[coord[0]][coord[1]];
+            world[coord[0]][coord[1]] = Tileset.FLOOR;
+            MapGenerator.avatarLocation = MapGenerator.convertXYtoIndex(coord[0] + move[0],coord[1]+move[1]);
         }
     }
+
+    /**
+     * Method used for autograding and testing your code. The input string will be a series
+     * of characters (for example, "n123sswwdasdassadwas", "n123sss:q", "lwww". The engine should
+     * behave exactly as if the user typed these characters into the engine using
+     * interactWithKeyboard.
+     *
+     * Recall that strings ending in ":q" should cause the game to quite save. For example,
+     * if we do interactWithInputString("n123sss:q"), we expect the game to run the first
+     * 7 commands (n123sss) and then quit and save. If we then do
+     * interactWithInputString("l"), we should be back in the exact same state.
+     *
+     * In other words, both of these calls:
+     *   - interactWithInputString("n123sss:q")
+     *   - interactWithInputString("lww")
+     *
+     * should yield the exact same world state as:
+     *   - interactWithInputString("n123sssww")
+     *
+     * @param input the input string to feed to your program
+     * @return the 2D TETile[][] representing the state of the world
+     */
+    public  TETile[][] interactWithInputString(String input) {
+        int seed = 0;
+        char[] chararray = input.toCharArray();
+        if(chararray[0]=='n') {
+
+            //make new world
+            int i = 1;
+            while(chararray[i]!='s') {
+                seed = seed * 10 + Character.getNumericValue(chararray[i]);
+                i++;
+            }
+            MapGenerator map = new MapGenerator(WIDTH, HEIGHT, seed);
+            world = map.getWorld();
+
+            //action in new world
+            /*i++;
+            while(!(chararray[i]==':'&&chararray[i+1]=='q')){ //while not at :q
+                interactWithKeyboard();
+            }*/
+        }
+
+        return world;
+    }
+
 
     private void displayMenu() {
         StdDraw.setCanvasSize(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE);
@@ -248,13 +326,13 @@ public class Engine {
         StdDraw.setPenColor(StdDraw.WHITE);
         Font font = new Font("Arial", Font.BOLD, 30);
         StdDraw.setFont(font);
-        StdDraw.text(WIDTH/2, HEIGHT/2 + 3, "START NEW GAME");
-        StdDraw.text(WIDTH/2, HEIGHT/2 , "CHANGE AVATAR");
-        StdDraw.text(WIDTH/2, HEIGHT/2 - 3, "CHANGE INSTRUMENT");
+        StdDraw.text(WIDTH/2, HEIGHT/2 + 3, "START NEW GAME (N)");
+        StdDraw.text(WIDTH/2, HEIGHT/2 , "LOAD GAME (L)");
+        StdDraw.text(WIDTH/2, HEIGHT/2 - 3, "CHANGE AVATAR (C)");
         Font font2 = new Font("Arial", Font.BOLD, 20);
         StdDraw.setFont(font2);
         StdDraw.text(WIDTH/2, 6, "CURRENT AVATAR: ");
-        StdDraw.text(WIDTH/2, 2, "PRESS Q TO EXIT");
+        StdDraw.text(WIDTH/2, 2, "PRESS Q TO EXIT (Q)");
         double[] x = new double[]{WIDTH/2 -13, WIDTH/2 -13, WIDTH/2 - 12};
         double[] y = new double[]{HEIGHT/2 +3.5 , HEIGHT/2 + 2.5 , HEIGHT/2 +3 };
         StdDraw.filledPolygon(x,y);
@@ -266,23 +344,16 @@ public class Engine {
         Font font = new Font("Arial", Font.BOLD, 30);
         Font font2 = new Font("Arial", Font.BOLD, 20);
         StdDraw.setFont(font);
-        StdDraw.text(WIDTH/2, HEIGHT/2 + 3, "START NEW GAME");
-        StdDraw.text(WIDTH/2, HEIGHT/2 , "CHANGE AVATAR");
-        StdDraw.text(WIDTH/2, HEIGHT/2 - 3, "CHANGE INSTRUMENT");
+        StdDraw.text(WIDTH/2, HEIGHT/2 + 3, "START NEW GAME (N)");
+        StdDraw.text(WIDTH/2, HEIGHT/2 , "LOAD GAME (L)");
+        StdDraw.text(WIDTH/2, HEIGHT/2 - 3, "CHANGE AVATAR (C)");
         StdDraw.setFont(font2);
         StdDraw.text(WIDTH/2, 6, "CURRENT AVATAR: ");
-        StdDraw.text(WIDTH/2, 2, "PRESS Q TO EXIT");
+        StdDraw.text(WIDTH/2, 2, "PRESS Q TO EXIT (Q)");
         double[] x = new double[]{WIDTH/2 -13, WIDTH/2 -13, WIDTH/2 - 12};
         double[] y = new double[]{HEIGHT/2 +3.5 - P*3, HEIGHT/2 + 2.5 - P*3, HEIGHT/2 +3 - P*3};
         StdDraw.filledPolygon(x,y);
         MapGenerator.avatar.draw(WIDTH/2 + 7,5.5);
-    }
-    public void displayEnding() {
-        StdDraw.clear(StdDraw.BLACK);
-        StdDraw.setPenColor(StdDraw.WHITE);
-        Font font = new Font("Arial", Font.BOLD, 40);
-        StdDraw.setFont(font);
-        StdDraw.text(WIDTH/2, HEIGHT/2, "CONGRATS YOU DID IT");
     }
     public void displayAvatar(int P) {
         StdDraw.clear(StdDraw.BLACK);
@@ -297,55 +368,15 @@ public class Engine {
         double[] y = new double[]{HEIGHT/2 + 5 - P*3, HEIGHT/2 + 4 - P*3, HEIGHT/2 +4.5 - P*3};
         StdDraw.filledPolygon(x,y);
     }
-
-    /**
-     * Method used for autograding and testing your code. The input string will be a series
-     * of characters (for example, "n123sswwdasdassadwas", "n123sss:q", "lwww". The engine should
-     * behave exactly as if the user typed these characters into the engine using
-     * interactWithKeyboard.
-     * <p>
-     * Recall that strings ending in ":q" should cause the game to quite save. For example,
-     * if we do interactWithInputString("n123sss:q"), we expect the game to run the first
-     * 7 commands (n123sss) and then quit and save. If we then do
-     * interactWithInputString("l"), we should be back in the exact same state.
-     * <p>
-     * In other words, both of these calls:
-     * - interactWithInputString("n123sss:q")
-     * - interactWithInputString("lww")
-     * <p>
-     * should yield the exact same world state as:
-     * - interactWithInputString("n123sssww")
-     *
-     * @param input the input string to feed to your program
-     * @return the 2D TETile[][] representing the state of the world
-     */
-    public TETile[][] interactWithInputString(String input) {
-        // passed in as an argument, and return a 2D tile representation of the
-        // world that would have been drawn if the same inputs had been given
-        // to interactWithKeyboard().
-        //
-        // See proj3.byow.InputDemo for a demo of how you can make a nice clean interface
-        // that works for many different input types.
-
-        char[] chararray = input.toCharArray();
-
-        //pick out seed
-        int seed = 0;
-        for (int i = 0; i < chararray.length - 1; i++) {
-            seed = seed * 10 + Character.getNumericValue(chararray[i]);
-        }
-
-        //create map
-        MapGenerator map = new MapGenerator(WIDTH,HEIGHT, seed);
-
-        return map.getWorld();
+    public void displayEnding() {
+        StdDraw.clear(StdDraw.BLACK);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        Font font = new Font("Arial", Font.BOLD, 40);
+        StdDraw.setFont(font);
+        StdDraw.text(WIDTH/2, HEIGHT/2, "CONGRATS YOU DID IT");
+        Font font2 = new Font("Arial", Font.BOLD, 20);
+        StdDraw.setFont(font2);
+        StdDraw.text(WIDTH/2, 2, "PRESS N TO START A NEW GAME");
+        StdDraw.text(WIDTH/2, 4, "PRESS Q TO QUIT");
     }
-
-    /*public static void main(String[] args) {
-        Engine yo = new Engine();
-        TERenderer ter = new TERenderer();
-        ter.initialize(WIDTH,HEIGHT);
-        TETile[][] world = yo.interactWithInputString("n23564s");
-        ter.renderFrame(world);
-    }*/
 }
