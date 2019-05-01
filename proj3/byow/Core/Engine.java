@@ -123,7 +123,7 @@ public class Engine {
                 hasntStarted = false;
                 TERenderer ter = new TERenderer();
                 ter.initialize(WIDTH, HEIGHT);
-                String seed = "n519788084356903164s";
+                String seed = "n519788084356064s";
                 world = interactWithInputString(seed);
                 ter.renderFrame(world);
                 clip.stop();
