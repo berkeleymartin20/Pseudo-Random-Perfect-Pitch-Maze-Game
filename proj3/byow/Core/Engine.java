@@ -298,7 +298,18 @@ public class Engine {
             }
             if(memeMap.avatarLocation == memeMap.goalLocation) {
                 memeLand = false;
+                int temp = map.avatarLocation;
                 moveAvatar(new int[]{0,-1});
+                int temp2 = map.avatarLocation;
+                if (temp == temp2) {
+                    moveAvatar(new int[]{0,1});
+                    temp2 = map.avatarLocation;
+                } if (temp == temp2 ) {
+                    moveAvatar(new int[]{1,0});
+                    temp2 = map.avatarLocation;
+                } if(temp == temp2) {
+                    moveAvatar(new int[]{-1,0});
+                }
                 ter.renderFrame(world);
                 hud();
                 memeMap = new MapGenerator(WIDTH,HEIGHT,map.avatar);
