@@ -56,6 +56,7 @@ public class Engine {
 
     private int p = 0;
     private int p2 = 0;
+    private int counter = 0;
 
     private Clip clip = null;
     private Clip bleep = null;
@@ -68,6 +69,7 @@ public class Engine {
      */
     public void interactWithKeyboard() {
         try {
+
             Synthesizer synthesizer = MidiSystem.getSynthesizer();
             synthesizer.open();
             midi = synthesizer.getChannels()[4];
@@ -88,6 +90,7 @@ public class Engine {
         } //initialize the text file for words of wisdom
         av = Tileset.AVATAR;
         displayMenu();
+        StdDraw.enableDoubleBuffering();
         tryAudio();
         while (endGame) {
             //navigate in the main lobby
@@ -174,8 +177,9 @@ public class Engine {
     }
     public void troll(){
         String file = "byow/Core/rickpic.png";
-        StdDraw.picture((double)WIDTH/2.0,(double)HEIGHT*(2.0/3.0),file,HEIGHT/2,HEIGHT/2);
+        StdDraw.picture((double)WIDTH/2.0,(double)HEIGHT*(2.5/3.0),file,HEIGHT/2,HEIGHT/2,10*counter);
         StdDraw.show();
+        counter++;
     }
     public void startGame() {
         hasntStarted = false;
@@ -281,6 +285,8 @@ public class Engine {
         }
 
         if (startGame && memeLand) {
+
+            troll();
             if (StdDraw.isKeyPressed(KeyEvent.VK_W)) {
                 moveMeme(new int[]{0, 1});
                 troll();
@@ -291,6 +297,7 @@ public class Engine {
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
                 moveMeme(new int[]{1, 0});
+                troll();
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
                 moveMeme(new int[]{-1, 0});
