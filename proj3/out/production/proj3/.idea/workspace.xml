@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="377c16f9-806d-49d5-ae01-4e9778e7dd14" name="Default Changelist" comment="">
+    <list default="true" id="a30fcb7d-4816-4d96-b46f-d4af10410ccf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byow/Core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/Engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byow/Core/MapGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/Core/MapGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/byow/TileEngine/Tileset.java" beforeDir="false" afterPath="$PROJECT_DIR$/byow/TileEngine/Tileset.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/Engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/Engine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator$Room.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/Core/MapGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proj3/byow/TileEngine/Tileset.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proj3/byow/TileEngine/Tileset.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,36 +21,56 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="84" column="21" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7019#7020#0" expanded="true" />
-                <element signature="e#7047#7048#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byow/Core/Engine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5650">
-              <caret line="339" lean-forward="true" selection-start-line="339" selection-end-line="339" />
+            <state relative-caret-position="1413">
+              <caret line="175" column="33" selection-start-line="175" selection-start-column="33" selection-end-line="175" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4264#4798#1" />
+                <element signature="e#7186#7801#1" />
+                <element signature="e#7894#7990#1" />
+                <element signature="e#8044#8141#1" />
+                <element signature="e#8195#8291#1" />
+                <element signature="e#8345#8442#1" />
+                <element signature="e#8607#8759#1" />
+                <element signature="e#8830#9528#1" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/byow/Core/MapGeneratorTester.java">
+        <entry file="file://$PROJECT_DIR$/byow/TileEngine/Tileset.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-459">
-              <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            <state relative-caret-position="182">
+              <caret line="35" column="93" selection-start-line="35" selection-start-column="93" selection-end-line="35" selection-end-column="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="361" column="45" selection-start-line="361" selection-start-column="45" selection-end-line="361" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8334#8335#0" expanded="true" />
+                <element signature="docComment;method#avatarPoint#0;class#MapGenerator#0" />
+                <element signature="docComment;method#goalPoint#0;class#MapGenerator#0" />
+                <element signature="e#10928#10929#0" expanded="true" />
+                <element signature="e#10955#10956#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/byow/TileEngine/TERenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
             </state>
           </provider>
         </entry>
@@ -58,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byow/Core/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+            <state relative-caret-position="165">
+              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -68,23 +88,25 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>randomutil</find>
-      <find>randomutils</find>
-      <find>randomUtils</find>
-      <find>nextint</find>
-      <find>print</find>
-      <find>9</find>
-      <find>mapgenerator</find>
-      <find>MapGenerator</find>
-      <find>update</find>
-      <find>avatarlocation</find>
+      <find>Thread.</find>
+      <find>moveAv</find>
+      <find>sound()</find>
+      <find>(endGameScreen &amp;&amp; StdDraw.isKeyPressed(KeyEvent.VK_N))</find>
+      <find>menu()</find>
+      <find>goallocation</find>
+      <find>VK_l</find>
       <find>avatar</find>
-      <find>goal</find>
-      <find>location</find>
-      <find>interact</find>
-      <find>roomWOrld</find>
-      <find>tile</find>
-      <find>pickPoint</find>
+      <find>hud</find>
+      <find>map.avatarlocation == map</find>
+      <find>MapGenerator</find>
+      <find>memeLand</find>
+      <find>descriptio`</find>
+      <find>clip</find>
+      <find>bleep</find>
+      <find>done</find>
+      <find>done</find>
+      <find>memeland</find>
+      <find>hud(){</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,19 +115,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/byow/Core/UnionFind.java" />
-        <option value="$PROJECT_DIR$/byow/lab13/MemoryGame.java" />
-        <option value="$PROJECT_DIR$/byow/Core/MapGeneratorTester.java" />
-        <option value="$PROJECT_DIR$/byow/Core/Engine_Martin.java" />
-        <option value="$PROJECT_DIR$/byow/Core/Main.java" />
-        <option value="$PROJECT_DIR$/byow/Core/Engine.java" />
+        <option value="$PROJECT_DIR$/byow/TileEngine/Tileset.java" />
         <option value="$PROJECT_DIR$/byow/Core/MapGenerator.java" />
+        <option value="$PROJECT_DIR$/byow/Core/Engine.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="812" />
-    <option name="height" value="726" />
+    <option name="x" value="-15" />
+    <option name="width" value="1890" />
+    <option name="height" value="960" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -113,6 +132,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -135,19 +155,19 @@
               <item name="proj3" type="b2602c69:ProjectViewProjectNode" />
               <item name="proj3" type="462c0819:PsiDirectoryNode" />
               <item name="byow" type="462c0819:PsiDirectoryNode" />
-              <item name="lab13" type="462c0819:PsiDirectoryNode" />
+              <item name="TileEngine" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556695209378" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Martin_Core_proj3" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556854179843" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../sp19-s742/proj3" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -162,32 +182,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="BoringWorldDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="byow.lab12.BoringWorldDemo" />
-      <module name="proj3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="byow.lab12.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Engine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="byow.Core.Engine" />
-      <module name="proj3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="byow.Core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="byow.Core.Main" />
       <module name="proj3" />
@@ -201,7 +195,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MapGeneratorTester" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MapGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="byow.Core.MapGenerator" />
       <module name="proj3" />
       <extension name="coverage">
         <pattern>
@@ -209,9 +204,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="byow.Core" />
-      <option name="MAIN_CLASS_NAME" value="byow.Core.MapGeneratorTester" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -219,9 +211,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Engine" />
-        <item itemvalue="JUnit.MapGeneratorTester" />
-        <item itemvalue="Application.BoringWorldDemo" />
+        <item itemvalue="Application.MapGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -230,51 +220,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="377c16f9-806d-49d5-ae01-4e9778e7dd14" name="Default Changelist" comment="" />
-      <created>1555907450763</created>
+      <changelist id="a30fcb7d-4816-4d96-b46f-d4af10410ccf" name="Default Changelist" comment="" />
+      <created>1556757363174</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1555907450763</updated>
+      <updated>1556757363174</updated>
     </task>
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 01h 03m 27s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 01h 05m 34s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 01h 11m 05s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 01h 12m 23s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 01h 12m 42s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 01h 16m 36s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 03h 08m 16s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 20h 20m 31s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 20h 22m 13s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MapGeneratorTester - 2019.04.24 at 20h 28m 39s.xml">
-      <configuration name="MapGeneratorTester" configurationId="JUnit" />
-    </history-entry>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1293" height="733" extended-state="7" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16194332" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2534413" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -283,16 +241,16 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49959514" visible="true" weight="0.1774461" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.33001658" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2895204" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Style Checker" order="8" weight="0.37976784" />
+      <window_info anchor="bottom" id="Style Checker" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50040483" side_tool="true" weight="0.24378109" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3897181" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -302,112 +260,94 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.2534413" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.106571935" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39964476" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Style Checker" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/byow/lab12/RandomWorldDemo.java">
+    <entry file="file://$PROJECT_DIR$/../../sp19-s742/proj3/byow/Core/Engine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        <state relative-caret-position="3927">
+          <caret line="247" column="10" selection-start-line="247" selection-start-column="10" selection-end-line="260" selection-end-column="28" />
         </state>
       </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../sp19-s1107/library-sp19/javalib/stdlib-package.jar!/edu/princeton/cs/introcs/StdDraw.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="111" selection-start-line="111" selection-end-line="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/lab12/BoringWorldDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/UnionFind.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/RandomUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/util/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5916">
-          <caret line="387" selection-start-line="387" selection-end-line="387" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/lab13/MemoryGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/background.wav">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/TileEngine/TERenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/Engine_Martin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="300" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/MapGeneratorTester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-459">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        <state relative-caret-position="187">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/Core/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/byow/Core/Engine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5650">
-          <caret line="339" lean-forward="true" selection-start-line="339" selection-end-line="339" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="165">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/byow/Core/MapGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="84" column="21" selection-start-line="84" selection-start-column="21" selection-end-line="84" selection-end-column="21" />
+        <state relative-caret-position="233">
+          <caret line="361" column="45" selection-start-line="361" selection-start-column="45" selection-end-line="361" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7019#7020#0" expanded="true" />
-            <element signature="e#7047#7048#0" expanded="true" />
+            <element signature="e#8334#8335#0" expanded="true" />
+            <element signature="docComment;method#avatarPoint#0;class#MapGenerator#0" />
+            <element signature="docComment;method#goalPoint#0;class#MapGenerator#0" />
+            <element signature="e#10928#10929#0" expanded="true" />
+            <element signature="e#10955#10956#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byow/TileEngine/Tileset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="35" column="93" selection-start-line="35" selection-start-column="93" selection-end-line="35" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byow/Core/Engine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1413">
+          <caret line="175" column="33" selection-start-line="175" selection-start-column="33" selection-end-line="175" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4264#4798#1" />
+            <element signature="e#7186#7801#1" />
+            <element signature="e#7894#7990#1" />
+            <element signature="e#8044#8141#1" />
+            <element signature="e#8195#8291#1" />
+            <element signature="e#8345#8442#1" />
+            <element signature="e#8607#8759#1" />
+            <element signature="e#8830#9528#1" />
           </folding>
         </state>
       </provider>
