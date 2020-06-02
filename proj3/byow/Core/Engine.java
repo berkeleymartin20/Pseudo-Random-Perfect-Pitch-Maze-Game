@@ -34,6 +34,8 @@ public class Engine {
     private boolean endGame = true;
     private TETile[][] world;
     private MapGenerator map;
+
+    private int countDown = HEIGHT + WIDTH;
     /**
      * MEMEMEMEMEMEMEMEMEME
      */
@@ -69,7 +71,6 @@ public class Engine {
      */
     public void interactWithKeyboard() {
         try {
-
             Synthesizer synthesizer = MidiSystem.getSynthesizer();
             synthesizer.open();
             midi = synthesizer.getChannels()[4];
@@ -110,15 +111,23 @@ public class Engine {
                 startGame();
             }
             // game
-            if (!endGameScreen && !hasntStarted) {
+            if (!endGameScreen && !hasntStarted && countDown > 0) {
                 gameMap();
+            }
+            if (!endGameScreen && !hasntStarted && countDown <= 0) {
+                displayEnding("YOU RAN OUT OF STEPS :(");
+                StdDraw.show();
+                countDown = WIDTH + HEIGHT;
+                endGameScreen = true;
+                hasntStarted = true;
+                done.setFramePosition(0);
             }
             //game ended. Options to restart or quit
             if (!hasntStarted && map.avatarLocation == map.goalLocation) {
+                displayEnding("CONGRATS YOU DID IT");
+                StdDraw.show();
                 endGameScreen = true;
                 hasntStarted = true;
-                displayEnding();
-                StdDraw.show();
                 done.setFramePosition(0);
                 done.loop(Clip.LOOP_CONTINUOUSLY);
             }
@@ -143,7 +152,6 @@ public class Engine {
             if (hasntStarted && StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
                 System.exit(0);
             }
-
         }
     }
 
@@ -175,12 +183,15 @@ public class Engine {
             e.printStackTrace();
         }
     }
-    public void troll(){
+
+    public void troll() {
         String file = "byow/Core/rickpic.png";
-        StdDraw.picture((double)WIDTH/2.0,(double)HEIGHT*(2.5/3.0),file,HEIGHT/2,HEIGHT/2,10*counter);
+        StdDraw.picture((double) WIDTH / 2.0, (double) HEIGHT * (2.5 / 3.0), file,
+                HEIGHT / 2, HEIGHT / 2, 10 * counter);
         StdDraw.show();
         counter++;
     }
+
     public void startGame() {
         hasntStarted = false;
         ter = new TERenderer();
@@ -190,7 +201,7 @@ public class Engine {
         clip.stop();
     }
 
-    public void hud(){
+    public void hud() {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.rectangle(WIDTH / 2,
                 ((HEIGHT * (1 + HUD_RATIO) / HUD_RATIO)) - HEIGHT / (2 * HUD_RATIO),
@@ -204,7 +215,8 @@ public class Engine {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(startGame && !memeLand) {
+
+        if (startGame && !memeLand) {
             ter.renderFrame(world);
             hud();
             int mouseX = (int) Math.floor(StdDraw.mouseX());
@@ -216,21 +228,32 @@ public class Engine {
             }
         }
         if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-            try { Thread.sleep(100);} catch (Exception e) {e.printStackTrace();}
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             int[] goal = convertIndextoXY(map.goalLocation);
             int[] m = convertIndextoXY(map.memeLocation);
-            if(world[goal[0]][goal[1]] == Tileset.FLOOR){
-            world[goal[0]][goal[1]] = Tileset.FLOWER;} else {
+            if (world[goal[0]][goal[1]] == Tileset.FLOOR) {
+                world[goal[0]][goal[1]] = Tileset.FLOWER;
+            } else {
                 world[goal[0]][goal[1]] = Tileset.FLOOR;
             }
-            if(world[m[0]][m[1]] == Tileset.FLOOR){
-                world[m[0]][m[1]] = Tileset.FLOWER;} else {
+            if (world[m[0]][m[1]] == Tileset.FLOOR) {
+                world[m[0]][m[1]] = Tileset.FLOWER;
+            } else {
                 world[m[0]][m[1]] = Tileset.FLOOR;
             }
             ter.renderFrame(world);
         }
 
         if (startGame && !memeLand) {
+
+            StdDraw.text(9 * WIDTH / 10, ((HEIGHT * (1 + HUD_RATIO) / HUD_RATIO)) - 2,
+                    "STEPS REMAINING: " + countDown);
+            StdDraw.show();
+
             if (StdDraw.isKeyPressed(KeyEvent.VK_W)) {
                 moveAvatar(new int[]{0, 1});
                 keysPressed += "W";
@@ -266,6 +289,7 @@ public class Engine {
                     //saves position and seed
                     try (PrintWriter out = new PrintWriter("load.txt")) {
                         out.println(previousLoad + keysPressed);
+                        out.println(countDown);
                         out.close();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -273,7 +297,8 @@ public class Engine {
                     System.exit(0);
                 }
             }
-            if(map.avatarLocation == map.memeLocation) {
+
+            if (map.avatarLocation == map.memeLocation) {
                 memeLand = true;
                 ter.renderFrame(meme);
                 troll();
@@ -285,7 +310,6 @@ public class Engine {
         }
 
         if (startGame && memeLand) {
-
             troll();
             if (StdDraw.isKeyPressed(KeyEvent.VK_W)) {
                 moveMeme(new int[]{0, 1});
@@ -303,23 +327,25 @@ public class Engine {
                 moveMeme(new int[]{-1, 0});
                 troll();
             }
-            if(memeMap.avatarLocation == memeMap.goalLocation) {
+            if (memeMap.avatarLocation == memeMap.goalLocation) {
                 memeLand = false;
                 int temp = map.avatarLocation;
-                moveAvatar(new int[]{0,-1});
+                moveAvatar(new int[]{0, -1});
                 int temp2 = map.avatarLocation;
                 if (temp == temp2) {
-                    moveAvatar(new int[]{0,1});
+                    moveAvatar(new int[]{0, 1});
                     temp2 = map.avatarLocation;
-                } if (temp == temp2 ) {
-                    moveAvatar(new int[]{1,0});
+                }
+                if (temp == temp2) {
+                    moveAvatar(new int[]{1, 0});
                     temp2 = map.avatarLocation;
-                } if(temp == temp2) {
-                    moveAvatar(new int[]{-1,0});
+                }
+                if (temp == temp2) {
+                    moveAvatar(new int[]{-1, 0});
                 }
                 ter.renderFrame(world);
                 hud();
-                memeMap = new MapGenerator(WIDTH,HEIGHT,map.avatar);
+                memeMap = new MapGenerator(WIDTH, HEIGHT, map.avatar);
                 meme = memeMap.getMeme();
                 int[] m = convertIndextoXY(map.memeLocation);
                 world[m[0]][m[1]] = Tileset.FLOWER;
@@ -367,11 +393,11 @@ public class Engine {
 
     public void collectSeed() {
         if (StdDraw.hasNextKeyTyped()) {
-            try {
+            /*try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             char add = StdDraw.nextKeyTyped();
             if (!checkIfNumber(add)) {
                 return;
@@ -400,9 +426,15 @@ public class Engine {
     }
 
     public void menu() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (StdDraw.isKeyPressed(KeyEvent.VK_N)
                 || (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && p == 0)) {
             keysPressed += "N";
+            countDown = HEIGHT + WIDTH;
             bleep();
             displaySeed();
             StdDraw.show();
@@ -412,6 +444,7 @@ public class Engine {
         if (StdDraw.isKeyPressed(KeyEvent.VK_C)
                 || (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && p == 2)) {
             displayAvatar(p2);
+            StdDraw.show();
             bleep();
             doneChoosingCharacter = false;
         }
@@ -426,6 +459,7 @@ public class Engine {
                 File loadFile = new File(load).getAbsoluteFile();
                 Scanner loadScanned = new Scanner(new FileInputStream(loadFile));
                 loadSeed = loadScanned.next();
+                countDown = Integer.parseInt(loadScanned.next());
                 loadSeed = loadSeed.substring(0, loadSeed.length() - 2);
                 previousLoad = loadSeed;
             } catch (IOException e) {
@@ -471,9 +505,10 @@ public class Engine {
         ter.renderFrame(world);
         hud();
         sound();
+        countDown--;
     }
 
-    public void moveMeme (int[] move) {
+    public void moveMeme(int[] move) {
         updateMeme(move);
         ter.renderFrame(meme);
         sound();
@@ -485,11 +520,11 @@ public class Engine {
     public void sound() {
         int pitch = (int) (distance() * (PITCH_LIMIT / MAX_DISTANCE));
         play(PITCH_LIMIT - pitch);
-        try {
+        /*try {
             Thread.sleep(150);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -504,7 +539,6 @@ public class Engine {
             midi.noteOff(pitch, 50);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
-
         }
     }
 
@@ -609,7 +643,7 @@ public class Engine {
         int counter = 2;
         String moves = "";
         input = input.toLowerCase();
-        if(input.equals("")){
+        if (input.equals("")) {
             input = DEFAULT_SEED;
         }
         if (input.charAt(0) == 'n') {
@@ -620,7 +654,7 @@ public class Engine {
             initialize(seedT);
 
             if (input.length() - 1 >= counter) {
-                moves = input.substring(counter );
+                moves = input.substring(counter);
             }
             for (int x = 0; x < moves.length(); x++) {
                 String temp = "" + moves.charAt(x);
@@ -631,6 +665,7 @@ public class Engine {
                 if (temp.equals("q") && test.equals(":")) {
                     try (PrintWriter out = new PrintWriter("load.txt")) {
                         out.println(input.substring(0, input.length() - 3));
+                        out.println(countDown);
                         out.close();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -646,6 +681,7 @@ public class Engine {
                 File loadFile = new File(load).getAbsoluteFile();
                 Scanner loadScanned = new Scanner(new FileInputStream(loadFile));
                 movesCombined = loadScanned.next();
+                countDown = Integer.parseInt(loadScanned.next());
                 movesCombined = movesCombined.substring(0, movesCombined.length() - 2);
                 scanThis = movesCombined;
             } catch (IOException e) {
@@ -667,6 +703,7 @@ public class Engine {
                 if (temp.equals("q") && test.equals(":")) {
                     try (PrintWriter out = new PrintWriter("load.txt")) {
                         out.println(movesCombined.substring(0, movesCombined.length() - 2));
+                        out.println(countDown);
                         out.close();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -688,13 +725,11 @@ public class Engine {
         this.seed = "" + seed;
         map = new MapGenerator(WIDTH, HEIGHT, seed);
         world = map.getWorld();
-        av = Tileset.AVATAR;
         map.avatar = av;
         int[] avLocation = convertIndextoXY(map.avatarLocation);
         world[avLocation[0]][avLocation[1]] = map.avatar;
-        memeMap = new MapGenerator(WIDTH,HEIGHT,av);
+        memeMap = new MapGenerator(WIDTH, HEIGHT, av);
         meme = memeMap.getMeme();
-        System.out.println("initialized");
     }
 
     public void avatarUpdate(String direction) {
@@ -734,7 +769,6 @@ public class Engine {
             return y * WIDTH + x;
         }
     }
-
 
 
     public void wordsOfWisdom() {
@@ -874,7 +908,7 @@ public class Engine {
         StdDraw.filledPolygon(x, y);
     }
 
-    public void displayEnding() {
+    public void displayEnding(String text) {
         StdDraw.clear(StdDraw.BLACK);
         StdDraw.setPenColor(StdDraw.WHITE);
 
@@ -883,13 +917,11 @@ public class Engine {
                 - HEIGHT / (2 * HUD_RATIO), (WIDTH - 0.9) / 2, HEIGHT / (2 * HUD_RATIO));
         Font font = new Font("Arial", Font.BOLD, 40);
         StdDraw.setFont(font);
-        StdDraw.text(WIDTH / 2, (HEIGHT / 2), "CONGRATS YOU DID IT");
+        StdDraw.text(WIDTH / 2, (HEIGHT / 2), text);
         Font font2 = new Font("Arial", Font.BOLD, 20);
         StdDraw.setFont(font2);
         StdDraw.text(WIDTH / 2, 2, "PRESS N TO START A NEW GAME");
         StdDraw.text(WIDTH / 2, 4, "PRESS Q TO QUIT");
     }
 
-
 }
-
